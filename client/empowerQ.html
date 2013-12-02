@@ -1,0 +1,103 @@
+<head>
+  <title>empowerQ</title>
+</head>
+
+<body>
+	{{> navigation}}
+</body>
+
+<template name="navigation">
+	<div class="top-bar">
+		<div class="small-12 columns center clearfix">
+			<span class="name" style="color:#f8f8f8;">EmpowerQ</span>
+			<button id="newQuestionBtn" class="button right">Ask Question</button>
+		</div>
+	</div>
+	{{#if showSearch}}
+		{{> searchBox}}
+	{{/if}}
+	{{#if showResults}}
+		{{> searchResults}}
+	{{/if}}
+	{{#if showNewQuestion}}
+		{{> newQuestion}}
+	{{/if}}
+</template>
+
+<template name="searchBox">
+	<div class="row">
+		<br/>
+		<div class="small-12 columns">
+			<h5>Search</h5>
+			<div class="row collapse">
+				<div class="small-10 columns">
+					<input id="searchInput" type="text">
+				</div>
+				<div class="small-2 columns">
+					<button id="searchBtn" class="button postfix">Search</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="searchResults">
+	<br/>
+	<div class="row">
+		<div class="small-12 medium-10 large-10 columns">
+			<h5>Results</h5>
+			{{#each Match}}
+				<div class="callout panel">
+					<h6><b><a href="#" id="{{_id}}" class="qtitle">{{ztitle}}</a></b></h6>
+					<p>{{descr}}</p>
+					{{#each tags}}
+						<span class="radius secondary label" style="margin-bottom:5px;">{{this}}</span>
+					{{/each}}
+				</div>
+			{{/each}}
+		</div>
+
+		<div class="small-12 medium-2 large-2 columns">
+			<h5>Tags</h5>
+			<div class="panel">
+			<ul class="side-nav" >
+			  <li><a href="#">Link 1</a></li>
+			  <li><a href="#">Link 2</a></li>
+			  <li><a href="#">Link 3</a></li>
+			  <li><a href="#">Link 4</a></li>
+			</ul>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="newQuestion">
+	<br/>
+	<div class="panel">
+		<div class="row">
+			<div class="large-12 columns">
+				<h5>New Question</h5>
+				<input id="newQuestionTitle" type="text" placeholder="" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<label>Description</label>
+				<textarea id="newQuestionDescr" placeholder="" style="height:250px;"></textarea>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-12 large-12 medium-12 columns">
+				<label>Tags <span class="radius secondary label">(at least 1, max 5)</span></label>
+				<input id="newQuestionTags" type="text" placeholder="separate by comma" />
+			</div>
+		</div>
+		<div class="row">
+			<br/>
+			<div class="small-12 large-12 columns">
+				<button id="cancelNewQuestion" class="small button secondary">Cancel</button>
+				<button id="askQuestionBtn" class="button small right">Ask Question</button>
+			</div>
+		</div>
+	</div>
+</template>

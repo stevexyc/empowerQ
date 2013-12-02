@@ -1,0 +1,21 @@
+/* CSS declarations go here */
+body {
+
+}
+.top-bar .button {
+	top:7px;
+}
+.panel .side-nav {
+	padding-top: 0;
+}
+.panel.callout{
+	padding-left: 85px;
+	margin-bottom: .5rem;
+}
+.panel p {
+	margin-bottom: 0;
+	font-size: 13px;
+}
+.lightgrey {
+	background-color: #f8f8f8;
+}

@@ -1,0 +1,1 @@
+QuestionList = new Meteor.Collection("questionlist")
