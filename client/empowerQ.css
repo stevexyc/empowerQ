@@ -2,15 +2,55 @@
 body {
 
 }
+.top-bar {
+	overflow: visible;
+}
 .top-bar .button {
 	top:7px;
+}
+div.panel {
+	padding: 20px 20px 2px 20px;
+	background: #f8f8f8;
+	/*background: -moz-linear-gradient(top, #FFFFFF 0%, #F4F4F4 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(100%,#F4F4F4));
+	background: -o-linear-gradient(top, #ffffff 0%,#f4f4f4 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#F4F4F4',GradientType=0 );*/
+	box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+/*	-webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+*/	margin: 0 0 20px 0;
 }
 .panel .side-nav {
 	padding-top: 0;
 }
+.label {
+	cursor: pointer;
+}
+.panel .side-nav .label {
+	margin-bottom: 0;
+}
+.panel .side-nav a {
+	line-height: 12px;
+	font-size: 12px;
+}
+.panel .relatedQs li {
+	border-bottom: 1px dotted #ccc;
+	padding-bottom: 10px;
+	padding-top: 3px;
+}
 .panel.callout{
 	padding-left: 85px;
 	margin-bottom: .5rem;
+	position: relative;
+	min-height: 120px;
+}
+.panel.callout > .panel.callout {
+	padding-left: 60px;
+	background-color: #fff;
+	box-shadow: none;
+	min-height: 65px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
 }
 .panel p {
 	margin-bottom: 0;
@@ -18,4 +58,66 @@ body {
 }
 .lightgrey {
 	background-color: #f8f8f8;
+}
+
+.triangle-up {
+	position: absolute;
+	left: 12px;
+	top: 8px;
+	width: 0px;
+	height: 0px;
+	border-style: solid;
+	border-width: 0 25px 20px 25px;
+	border-color: transparent transparent lightgrey transparent;
+	cursor: pointer;
+}
+
+.triangle-down {
+	position: absolute;
+	top: 50px;
+	left: 12px;
+	width: 0px;
+	height: 0px;
+	border-style: solid;
+	border-width: 20px 25px 0 25px;
+	border-color: lightgrey transparent transparent transparent;
+	cursor: pointer;
+	/*border-color: #007bff transparent transparent transparent;*/
+}
+.votesCount {
+	position: absolute;
+	top: 31px;
+	left: 12px;
+	width: 50px;
+	text-align: center;
+	color: #989898;
+}
+.tri-up-sm {
+	top: 15px;
+	border-width: 0 15px 10px 15px;
+}
+.tri-down-sm {
+	top: 41px;
+	border-width: 10px 15px 0 15px;
+}
+.votesCount-sm {
+	top: 27px;
+	width: 30px;
+	font-size: 12px;
+}
+.active-up {
+	border-color: transparent transparent #A71930 transparent;
+}
+.active-down {
+	border-color: #A71930 transparent transparent transparent;	
+}
+.votesCount-res {
+	background-color: #fff;
+	left: 8px;
+	top: 18px;
+	font-size: 13px;
+	text-align: center;
+	border: 1px dotted #ccc;
+	padding: 8px;
+	width: 69px;
 }

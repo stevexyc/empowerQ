@@ -1,5 +1,5 @@
 <head>
-  <title>empowerQ</title>
+  <title>Final Project - Steve</title>
 </head>
 
 <body>
@@ -8,13 +8,17 @@
 
 <template name="navigation">
 	<div class="top-bar">
-		<div class="small-12 columns center clearfix">
-			<span class="name" style="color:#f8f8f8;">EmpowerQ</span>
+		<div class="small-12 columns">
+			<span class="name" style="color:#f8f8f8;">Final Project - Steve</span>
+			<button class="button secondary right">{{loginButtons align="right"}}</button>
 			<button id="newQuestionBtn" class="button right">Ask Question</button>
 		</div>
 	</div>
 	{{#if showSearch}}
 		{{> searchBox}}
+	{{/if}}
+	{{#if showDetails}}
+		{{> details}}
 	{{/if}}
 	{{#if showResults}}
 		{{> searchResults}}
@@ -22,6 +26,15 @@
 	{{#if showNewQuestion}}
 		{{> newQuestion}}
 	{{/if}}
+</template>
+
+<template name="test">
+	<div class="row">
+		<div class="small-12 columns" style="position:fixed;bottom:0;">
+			<button id="resetDB" class="button alert right">reset DB</button>
+			<button id="resetUsers" class="button alert right">reset Users</button>
+		</div> 
+	</div>
 </template>
 
 <template name="searchBox">
@@ -44,32 +57,111 @@
 <template name="searchResults">
 	<br/>
 	<div class="row">
-		<div class="small-12 medium-10 large-10 columns">
-			<h5>Results</h5>
-			{{#each Match}}
-				<div class="callout panel">
-					<h6><b><a href="#" id="{{_id}}" class="qtitle">{{ztitle}}</a></b></h6>
-					<p>{{descr}}</p>
-					{{#each tags}}
-						<span class="radius secondary label" style="margin-bottom:5px;">{{this}}</span>
+		<div class="small-12 medium-12 columns">
+			<div class="row">
+				<div class="small-10 medium-10 columns">
+					<h5>
+						<a href="#" id="backToAll">All Questions</a> {{QuestionListHeader}}
+						<dl class="sub-nav right" style="margin-bottom:0;">
+							<dd class="{{sortPopular}}"><a href="#" id="sortPopular">Popular</a></dd>
+							<dd class="{{sortRecent}}"><a href="#" id="sortRecent">Recent</a></dd>
+						</dl>
+					</h5>
+				</div>
+			</div>
+			<div class="row">
+				<div class="small-12 medium-10 large-10 columns">
+					{{#each Match}}
+						<div class="callout panel">
+							<div class="votesCount votesCount-res">
+								{{votes}}<br/>votes<br/><br/>
+								{{answers}}<br/>answers
+							</div>
+							<h6><b><a href="#" id="{{_id}}" class="qtitle">{{full title}}</a></b></h6>
+							<p>{{descriptive descr}}</p>
+							{{#each tags}}
+								{{#if this}}<span class="radius secondary label relatedTag" style="margin-bottom:5px;">{{this}}</span>{{/if}}
+							{{/each}}
+						</div>
 					{{/each}}
 				</div>
-			{{/each}}
-		</div>
 
-		<div class="small-12 medium-2 large-2 columns">
-			<h5>Tags</h5>
-			<div class="panel">
-			<ul class="side-nav" >
-			  <li><a href="#">Link 1</a></li>
-			  <li><a href="#">Link 2</a></li>
-			  <li><a href="#">Link 3</a></li>
-			  <li><a href="#">Link 4</a></li>
-			</ul>
+				<div class="small-12 medium-2 large-2 columns" style="padding-left:0;">
+					<div class="panel">
+					<h5>Tags</h5>
+					<ul class="side-nav">
+						{{#each relatedTag}}
+							{{#if this}}<li><span class="radius secondary label relatedTag">{{this}}</span></li>{{/if}}
+						{{/each}}
+					</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
+
+<template name="details">
+	<br/>
+	<div class="row">
+		<div class="small-12 medium-12 large-12 columns">
+			<h5><a href="#" id="backSearch">{{backSearch}}</a></h5>
+			<div class="row">
+				<div class="small-12 medium-10 large-10 columns">
+					{{#with thisQuestion}}
+					<div class="panel callout">
+
+						<div class="triangle-up {{uplist}}" id="upvote"></div>
+						<div class="votesCount">{{votes}}</div>
+						<div class="triangle-down {{downlist}}" id="downvote"></div>
+
+						<h5><b>{{full title}}</b></h5>
+						<p>{{descr}}</p>
+						{{#each tags}}
+							{{#if this}}<span class="radius secondary label tagged" style="margin-bottom:5px;">{{this}}</span>{{/if}}
+						{{/each}}
+						<br/>
+						<br/>
+						{{#each responses}}
+							<div class="panel callout" id="{{_id}}">
+									<div class="triangle-up tri-up-sm {{uplist}}"></div>
+									<div class="votesCount votesCount-sm">{{votes}}</div>
+									<div class="triangle-down tri-down-sm {{downlist}}"></div>
+								<p>{{text}}</p>
+							</div>
+						{{/each}}
+						<br/>
+						<textarea id="respondText" /></textarea>
+						<button id="respondBtn" class="button tiny">Respond</button>
+
+					</div>
+					{{/with}}
+				</div>
+				<div class="small-12 medium-2 large-2 columns" style="padding-left:0;">
+					<div class="panel">
+					<h5>Related Tags</h5>
+					<ul class="side-nav">
+						{{#each relatedTag}}
+							{{#if this}}<li><span class="radius secondary label relatedTag">{{this}}</span></li>{{/if}}
+						{{/each}}
+					</ul>
+					</div>
+				</div>
+				<div class="small-12 medium-2 large-2 columns" style="padding-left:0;">
+					<div class="panel">
+					<h5>Related Questions</h5>
+					<ul class="side-nav relatedQs" >
+						{{#each relatedQuestion}}
+							<li><a href="#" class="relatedQ">{{full title}}</a></li>
+						{{/each}}
+					</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
 
 <template name="newQuestion">
 	<br/>
